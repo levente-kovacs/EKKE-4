@@ -1,0 +1,30 @@
+@startuml My Architecture
+
+interface Talk {
+    +greet(): String
+    +tellFullName(): String
+    +tellAge(): String
+}
+
+class Person {
+    -firstName: String
+    -lastName: String
+    -age: int
+    +getFirstName(): String
+    +setFirstName(String): void
+    +getLastName(): String
+    +setLastName(String): void
+    +getAge(): int
+    +setAge(int): void
+}
+
+class Student {
+    -school: String
+    +getSchool(): String
+    +setSchool(String): void
+}
+
+Person --|> Student
+Talk ..|> Person
+
+@enduml
