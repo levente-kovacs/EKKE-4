@@ -1,0 +1,28 @@
+ena
+conf t
+hostname S1
+int vlan 1      --- belép a vlan 1-be
+ip address 192.168.1.2 255.255.255.0
+no sh           --- no shutdown --- felkapcsolja a vlan-t | vlan1-nél kell csak IP ADÁS UTÁN!
+exit
+
+copy run start          --- menti a futó configurációt
+copy run tftp           --- tftp serverre menti a futó configurációt (utána következő parancsba meg kell adni a server ip címét)
+
+no ip domain-lookup     --- hibás parancsok keresésének letiltása
+
+banner motd #A jogosulatlan belepes tilos!# --- bejelentkezéskor megjeleníti a szöveget. Message of the day.
+
+enable password epass   --- olvasható privilegizált jelszó
+enable secret jelszo    --- nem olvasható privilegizált jelszó
+service password-encryption     --- jelszó titkosítása
+
+line console 0          --- belépés a console-os kapcsolatba
+password jelszo         --- konzol hozzáférést védje
+login                   --- beállítja, hogy kérje a jelszót a konzolhoz
+
+
+// HELP
+- dhcp esetén a gépeken (ip-config fülbe) is az ip-t átállítani dhcp-range! (server ip-je az statikus dhcp esetén is!)
+- routernél config/interface-en belül jobb felül Port Status-t bekapcsolni! (IPV4 az alhálózat default gateway-e 192.168.10.1)
+- server Services/DHCP-nél az adatok megadása után SAVE gomb!

@@ -1,0 +1,116 @@
+--Switch1 (S1) konfigurációja (192.168.10.0/24)--
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname S1
+S1(config)# no ip domain-lookup
+S1(config)# banner motd #A jogosulatlan belepes tilos!#
+S1(config)# interface vlan 1
+S1(config-if)# ip address 192.168.10.2 255.255.255.0
+S1(config-if)# no shutdown
+S1(config-if)# exit
+S1(config)# ip default-gateway 192.168.10.1
+
+copy run start
+
+--Switch2 (S2) konfigurációja (192.168.20.0/24)--
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname S2
+S2(config)# no ip domain-lookup
+S2(config)# banner motd #A jogosulatlan belepes tilos!#
+S2(config)# service password-encryption
+S2(config)# enable secret epass
+
+! Konzol jelszó
+S2(config)# line console 0
+S2(config-line)# password cpass
+S2(config-line)# login
+S2(config-line)# exit
+
+! Management IP
+S2(config)# interface vlan 1
+S2(config-if)# ip address 192.168.20.2 255.255.255.0
+S2(config-if)# no shutdown
+S2(config-if)# exit
+S2(config)# ip default-gateway 192.168.20.1
+
+! VLAN-ok létrehozása és elnevezése
+S2(config)# vlan 10
+S2(config-vlan)# name DESIGN
+S2(config-vlan)# exit
+S2(config)# vlan 20
+S2(config-vlan)# name PUBLIC
+S2(config-vlan)# exit
+S2(config)# vlan 50
+S2(config-vlan)# name DISABLED
+S2(config-vlan)# exit
+
+S2(config)# int range Fa0/5-Fa0/24
+S2(config-if-range)# switchport mode access
+S2(config-if-range)# switchport access vlan 50
+S2(config-if-range)# shutdown
+S2(config-if-range)# exit
+
+S2(config)# interface range Fa0/1-Fa0/2
+S2(config-if-range)# switchport mode access
+S2(config-if-range)# switchport access vlan 10
+S2(config-if-range)# exit
+
+S2(config)# int range Fa0/3-Fa0/4
+S2(config-if-range)# switchport mode access
+S2(config-if-range)# switchport access vlan 20
+S2(config-if-range)# exit
+
+copy run start
+
+
+--Switch3 (S3) konfigurációja (192.168.30.0/24)--
+Switch> enable
+Switch# configure terminal
+Switch(config)# hostname S3
+S3(config)# no ip domain-lookup
+S3(config)# banner motd #A jogosulatlan belepes tilos!#
+
+! Management IP
+S3(config)# interface vlan 1
+S3(config-if)# ip address 192.168.30.2 255.255.255.0
+S3(config-if)# no shutdown
+S3(config-if)# exit
+S3(config)# ip default-gateway 192.168.30.1
+
+S3(config)# end
+S3# copy run start
+
+
+--Router (R1) konfigurációja--
+Router> enable
+Router# configure terminal
+Router(config)# hostname R1
+R1(config)# no ip domain-lookup
+R1(config)# banner motd #A jogosulatlan belepes tilos!#
+
+! Interfészek beállítása (első használható IP minden hálózatra)
+R1(config)# interface GigabitEthernet0/0
+R1(config-if)# ip address 192.168.10.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+
+R1(config)# interface GigabitEthernet0/1
+R1(config-if)# ip address 192.168.20.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+
+R1(config)# interface GigabitEthernet0/2
+R1(config-if)# ip address 192.168.30.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+
+R1(config)# end
+R1# copy run start
+
+--Server0 DHCP config--
+! ip 50-60
+def. gateway: 192.168.10.1
+dns server: 192.168.10.5 --server ip címe
+start ip: 192.168.10.50
+max users: 10

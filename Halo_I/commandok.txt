@@ -1,0 +1,58 @@
+-----/switch név átírás és mentés/------
+ena
+config term
+	no ip domain.lookp
+	hostname …
+exit
+copy running config startup-config
+
+------/switch cím beállítás/------
+ena
+configure terminal
+	interface vlan 1
+	ip address 192.168.1.2 255.255.255.0
+	no shutdown
+exit
+exit
+
+------/ping/------
+
+command promtp-on belül:
+
+ping 192.186.1.?  a kérdőjel helyére azt amelyikkel kommunikálni akarok
+
+
+-----/tftp/-----
+ena
+config term
+copy run tftp:
+
+
+----/VLAN/---- (ha megpingelem nem válaszol csak az amivel össze van kötve)
+ena
+conf term
+vlan 10
+name PUBLIC
+vlan 20
+name OFFICE
+int fa0/1
+switchport access vlan 10
+int fa0/2
+switchport access vlan 10
+int fa0/4
+switchport access vlan 20
+int fa0/4
+switchport access vlan 20	
+
+
+
+
+
+
+
+
+
+
+
+
+

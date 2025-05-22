@@ -3,13 +3,19 @@ package strategy_pattern;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import strategy_pattern.contexts.BillingContext;
 import strategy_pattern.models.StudentBilling;
 
 public class StrategyPatternTest {
-    BillingContext context = new BillingContext(new StudentBilling());
+    BillingContext context = null;
+
+    @BeforeEach
+    void setup() {
+        context = new BillingContext(new StudentBilling());
+    }
     
     @Test
     void testStudentBillingRight() {

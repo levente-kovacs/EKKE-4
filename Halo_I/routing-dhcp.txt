@@ -1,0 +1,54 @@
+Router0
+-------
+
+ena
+conf term
+    hostname R0 
+    no ip domain-lookup
+    banner motd #Authorized Personnel Only!#
+    int g0/0
+        ip address 192.168.1.1 255.255.255.0
+        no sh
+    exit
+    int g0/2
+        ip address 10.0.0.1 255.255.255.0
+        no sh
+    exit
+    ip route 192.168.2.0 255.255.255.0 10.0.0.2
+    ip route 0.0.0.0 0.0.0.0 10.0.0.2
+
+
+
+
+
+Router1
+-------
+
+ena
+conf term
+    hostname R1
+    no ip domain-lookup
+    banner motd #Authorized Personnel Only!#
+    int g0/0
+        ip address 192.168.2.1 255.255.255.0
+        no sh
+    exit
+    int g0/2
+        ip address 10.0.0.2 255.255.255.0
+        no sh
+    exit
+    int g0/1
+        ip address 172.16.1.1 255.255.255.0
+        no sh
+    exit
+    ip route 192.168.1.0 255.255.255.0 10.0.0.1 
+    ip route 0.0.0.0 0.0.0.0 172.16.1.2
+
+    ip dhcp excluded-address 192.168.2.1 192.168.2.49
+    ip dhcp excluded-address 192.168.2.60 192.168.2.254
+    ip dhcp pool INTERNAL
+        network 192.168.2.0 255.255.255.0
+        dns-server 192.168.1.5
+        domain-name ekke.hu
+        default-router 192.168.2.1
+    exit

@@ -7,6 +7,7 @@ import strategy_pattern.models.StudentBilling;
 
 public class Main {
     public static void main(String[] args) {
+        RegularBilling regularBilling = new RegularBilling();
         BillingContext billing = new BillingContext(new RegularBilling());
 
         double basePrice = 1000;

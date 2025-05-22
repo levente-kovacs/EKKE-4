@@ -24,7 +24,7 @@ class Student {
     +setSchool(String): void
 }
 
-Person --|> Student
-Talk ..|> Person
+Person <|-- Student
+Talk <|.. Person
 
 @enduml

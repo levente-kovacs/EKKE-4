@@ -37,3 +37,5 @@ public class PersonTest {
     }
 
 }
+
+//  Mentő kérdés: statégia, gof1, gof2, ocp + test írás

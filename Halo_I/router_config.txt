@@ -1,0 +1,73 @@
+1. Router1
+enable
+configure terminal
+interface Gig0/0/0
+ip address 172.16.1.1 255.255.255.0
+no shutdown
+exit
+
+interface Gig0/0/1
+ip address 10.0.0.1 255.255.255.0
+no shutdown
+exit
+
+2. Server0
+ip: 10.0.0.10
+subnet mask: 255.255.255.0
+default gateway: 10.0.0.1
+dns server: 10.0.0.10
+
+services -> dns:
+domain name: www.uni-eszterhazy.hu
+ip: 10.0.0.10
+
+services -> dhcp:
+dns server: 10.0.0.10
+start ip: 10.0.0.0
+subnet mask: 255.0.0.0
+max number of users: 10
+
+3.PC0
+ip: 172.16.1.20
+def. gateway: 172.16.1.1
+dns: 10.0.0.10
+
+4. PC1
+dhcp
+
+//nem kell
+5. Switch0
+ena
+conf term
+no ip domain-lookup
+hostname configeONE
+exit
+
+conf term
+interface vlan 1
+ip address 172.16.1.2 255.255.255.0
+no shutdown
+exit 
+exit
+
+copy run start
+
+//nem kell
+6. Switch1
+ena
+conf term
+no ip domain-lookup
+hostname configeTWO
+exit
+
+conf term
+interface vlan 2
+ip address 10.0.0.2 255.255.255.0
+no shutdown
+
+exit 
+exit
+
+copy run start
+
+
