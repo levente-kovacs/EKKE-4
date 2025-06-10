@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgTechTDD_getAlmaAr2", "ProgTechTDD_getAlmaAr2\ProgTechTDD_getAlmaAr2.csproj", "{B8B662DB-CF30-4A56-9BE6-583D26616BF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgTechTDD_getAlmaAr2Tests", "ProgTechTDD_getAlmaAr2Tests\ProgTechTDD_getAlmaAr2Tests.csproj", "{80E3161B-DE06-4DE1-B3C0-4E8EA565C77D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8B662DB-CF30-4A56-9BE6-583D26616BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B662DB-CF30-4A56-9BE6-583D26616BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B662DB-CF30-4A56-9BE6-583D26616BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B662DB-CF30-4A56-9BE6-583D26616BF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E3161B-DE06-4DE1-B3C0-4E8EA565C77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E3161B-DE06-4DE1-B3C0-4E8EA565C77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E3161B-DE06-4DE1-B3C0-4E8EA565C77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E3161B-DE06-4DE1-B3C0-4E8EA565C77D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

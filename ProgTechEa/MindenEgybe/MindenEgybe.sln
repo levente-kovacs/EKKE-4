@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindenEgybe", "MindenEgybe\MindenEgybe.csproj", "{37EB2B71-DB4C-4EF5-88BB-31FB0D497978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingStrategy", "BillingStrategy\BillingStrategy.csproj", "{DC0B0E8A-D05E-4BD3-857C-5BC67A30297F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdapterPattern", "AdapterPattern\AdapterPattern.csproj", "{786A6B07-7139-4058-B456-B0639438BCC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37EB2B71-DB4C-4EF5-88BB-31FB0D497978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EB2B71-DB4C-4EF5-88BB-31FB0D497978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EB2B71-DB4C-4EF5-88BB-31FB0D497978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EB2B71-DB4C-4EF5-88BB-31FB0D497978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC0B0E8A-D05E-4BD3-857C-5BC67A30297F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0B0E8A-D05E-4BD3-857C-5BC67A30297F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0B0E8A-D05E-4BD3-857C-5BC67A30297F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0B0E8A-D05E-4BD3-857C-5BC67A30297F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{786A6B07-7139-4058-B456-B0639438BCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{786A6B07-7139-4058-B456-B0639438BCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{786A6B07-7139-4058-B456-B0639438BCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{786A6B07-7139-4058-B456-B0639438BCC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

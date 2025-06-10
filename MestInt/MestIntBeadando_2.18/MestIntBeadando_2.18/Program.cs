@@ -145,6 +145,18 @@ class Huszar
     {
         return new Huszar(this.Sor, this.Oszlop, this.IsVilagos);
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null) return false;
+        if (obj is not Huszar masik) return false;
+        return Sor == masik.Sor && Oszlop == masik.Oszlop && IsVilagos == masik.IsVilagos;
+    }
+
+    public override int GetHashCode()
+    {
+        return Sor * 3 + Oszlop + (IsVilagos ? 100 : 200);
+    }
 }
 
 class F2p18Állapot : AbsztraktÁllapot
@@ -155,37 +167,25 @@ class F2p18Állapot : AbsztraktÁllapot
         { 0, 0, 0 },
         { 0, 0, 0 }
     };
-    //int[,] vilagosHuszarok = new int[,]
-    //{
-    //    { 0, 0 },
-    //    { 0, 1 },
-    //    { 0, 2 }
-    //};
-    //int[,] sotetHuszarok = new int[,]
-    //{
-    //    { 2, 0 },
-    //    { 2, 1 },
-    //    { 2, 2 }
-    //};
+
     List<Huszar> vilagosHuszarok = new List<Huszar>
     {
         new Huszar(0, 0, true),
         new Huszar(0, 1, true),
         new Huszar(0, 2, true)
     };
+
     List<Huszar> sotetHuszarok = new List<Huszar>
     {
         new Huszar(2, 0, false),
         new Huszar(2, 1, false),
         new Huszar(2, 2, false)
     };
-    //bool VilagosFogELepni = true;
+
     List<Huszar> mostFognakLepni = new List<Huszar>();
 
     public F2p18Állapot()
     {
-        //Console.WriteLine("Contructor starts.");
-
         foreach (Huszar huszar in vilagosHuszarok)
         {
             sakktábla[huszar.Sor, huszar.Oszlop] = 1;
@@ -195,14 +195,10 @@ class F2p18Állapot : AbsztraktÁllapot
             sakktábla[huszar.Sor, huszar.Oszlop] = 2;
         }
         this.mostFognakLepni = this.vilagosHuszarok;
-        //this.mostFogLepni = this.vilagosHuszarok[0];
-        //Console.WriteLine("Contructor runs.");
     }
 
     public override bool CélÁllapotE()
     {
-        //Console.WriteLine("CélÁllapotE runs.");
-
         if (vilagosHuszarok.All(h => h.Sor == 2) && sotetHuszarok.All(h => h.Sor == 0))
         {
             return true;
@@ -212,8 +208,6 @@ class F2p18Állapot : AbsztraktÁllapot
 
     public override int OperátorokSzáma()
     {
-        //Console.WriteLine("OperátorokSzáma runs.");
-
         return 8;
     }
 
@@ -233,88 +227,43 @@ class F2p18Állapot : AbsztraktÁllapot
         }
     }
 
-    private void ShuffleList(List<Huszar> list)
-    {
-        Random rnd = new Random();
-        int n = list.Count;
+    //private void ShuffleList(List<Huszar> list)
+    //{
+    //    Random rnd = new Random();
+    //    int n = list.Count;
 
-        while (n > 1)
-        {
-            n--;
-            int k = rnd.Next(n + 1);
-            (list[n], list[k]) = (list[k], list[n]); // swap
-        }
-    }
+    //    while (n > 1)
+    //    {
+    //        n--;
+    //        int k = rnd.Next(n + 1);
+    //        (list[n], list[k]) = (list[k], list[n]); // swap
+    //    }
+    //}
 
     private bool lóLépés(int relSor, int relOszlop)
     {
-        for (int index2 = 0; index2 < sakktábla.GetLength(0); index2++)
+        foreach (Huszar huszar in mostFognakLepni)
         {
-            for (int j = 0; j < sakktábla.GetLength(1); j++)
-            {
-                Console.Write(sakktábla[index2, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        //Console.WriteLine("lóLépés starts.");
-        //Console.WriteLine($"mostFognakLepni.Count: {mostFognakLepni.Count}");
+            if (!preLóLépés(huszar, relSor, relOszlop))
+                continue;
 
-        // ez egy operátor, nézük meg a VakÁllapotot,
-        // hogyan kell operátort írni
-        //int index = 0;
-        Console.WriteLine($"Világos lép-e? - {mostFognakLepni[0].IsVilagos}");
-        ShuffleList(mostFognakLepni);
+            sakktábla[huszar.Sor, huszar.Oszlop] = 0;
+            huszar.Sor += relSor;
+            huszar.Oszlop += relOszlop;
+            sakktábla[huszar.Sor, huszar.Oszlop] = huszar.IsVilagos ? 1 : 2;
 
-        Huszar mostLep = mostFognakLepni[0];
-        //Console.WriteLine("Itt vagyunk a preLóLépés előtt");
-        if (preLóLépés(mostLep, relSor, relOszlop))
-        {
-            //Console.WriteLine($"mostLep.Sor, mostLep.Oszlop: {mostLep.Sor}, {mostLep.Oszlop}");
-            //Console.WriteLine($"sakktábla[mostLep.Sor, mostLep.Oszlop]: {sakktábla[mostLep.Sor, mostLep.Oszlop]}");
-            sakktábla[mostLep.Sor, mostLep.Oszlop] = 0;
-            mostLep.Sor += relSor;
-            mostLep.Oszlop += relOszlop;
-            sakktábla[mostLep.Sor, mostLep.Oszlop] = mostLep.IsVilagos ? 1 : 2;
             mostFognakLepni = mostFognakLepni == vilagosHuszarok ? sotetHuszarok : vilagosHuszarok;
-            for (int index2 = 0; index2 < sakktábla.GetLength(0); index2++)
-            {
-                for (int j = 0; j < sakktábla.GetLength(1); j++)
-                {
-                    Console.Write(sakktábla[index2, j] + " ");
-                }
-                Console.WriteLine();
-            }
 
-            //break;
+            return ÁllapotE();
         }
-        //index++;
-        //while (index < mostFognakLepni.Count)
-        //{
-        //}
 
-        //if (index >= mostFognakLepni.Count)
-        //{
-        //    Console.WriteLine("Nincs lehetőség lépni.");
-        //    return false;
-        //}
-        //if (!preLóLépés(huszar, relSor, relOszlop)) return false;
-        // állapot átmenet
-        if (ÁllapotE()) return true;
         return false;
     }
+
     private bool preLóLépés(Huszar huszar, int relSor, int relOszlop)
     {
-        //Console.WriteLine($"PreLóLépés Huszár koordináták: {huszar.Sor}, {huszar.Oszlop}");
         int újSor = huszar.Sor + relSor;
         int újOszlop = huszar.Oszlop + relOszlop;
-
-        Console.WriteLine($"PreLóLépés honnan próbálok lépni koordináták: {huszar.Sor}, {huszar.Oszlop}");
-        Console.WriteLine($"PreLóLépés hova próbálok lépni koordináták: {újSor}, {újOszlop}");
-        if (újSor >= 0 && újSor < sakktábla.GetLength(0) && újOszlop >= 0 && újOszlop < sakktábla.GetLength(1))
-        {
-            Console.WriteLine($"PreLóLépés hova próbálok lépni érték: {sakktábla[újSor, újOszlop]}");
-        }
-        Console.WriteLine($"preLóLépés return: {újSor >= 0 && újSor < sakktábla.GetLength(0) && újOszlop >= 0 && újOszlop < sakktábla.GetLength(1) && sakktábla[újSor, újOszlop] == 0}");
 
         return újSor >= 0 && újSor < sakktábla.GetLength(0) &&
                újOszlop >= 0 && újOszlop < sakktábla.GetLength(1) &&
@@ -344,16 +293,24 @@ class F2p18Állapot : AbsztraktÁllapot
     {
         // a klónom mindig úgyanolyan típusú, mint én
         // a new lefoglalja a helyet a memóriába
-        F2p18Állapot myClone = new F2p18Állapot();
         // a klónom teljesen úgyanolyan, mint én
         //myClone.s = this.s;
         //myClone.sakktábla = this.sakktábla; // ez sekély klónozás
+        F2p18Állapot myClone = new F2p18Állapot();
         myClone.sakktábla = this.sakktábla.Clone() as int[,];
         myClone.vilagosHuszarok = this.vilagosHuszarok.Select(h => h.Clone()).ToList();
         myClone.sotetHuszarok = this.sotetHuszarok.Select(h => h.Clone()).ToList();
-        myClone.mostFognakLepni = this.mostFognakLepni.Select(h => h.Clone()).ToList();
+        if (this.mostFognakLepni == this.vilagosHuszarok)
+        {
+            myClone.mostFognakLepni = myClone.vilagosHuszarok;
+        }
+        else
+        {
+            myClone.mostFognakLepni = myClone.sotetHuszarok;
+        }
         return myClone;
     }
+
 }
 
 class F1p6Állapot : AbsztraktÁllapot
@@ -1272,7 +1229,7 @@ class Program
         Console.WriteLine("A Feladat 2.18 megoldása:");
         startCsúcs = new Csúcs(new F2p18Állapot());
         Console.WriteLine("A kereső egy 10 mélységi korlátos és körfigyelés backtrack.");
-        kereső = new BackTrack(startCsúcs, 1, false);
+        kereső = new BackTrack(startCsúcs, 10, true);
         kereső.megoldásKiírása(kereső.Keresés());
         Console.ReadLine();
     }
