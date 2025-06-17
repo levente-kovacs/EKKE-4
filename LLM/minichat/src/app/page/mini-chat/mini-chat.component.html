@@ -1,0 +1,26 @@
+<mat-card>
+  <h2>MiniChat</h2>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Kérdés / Szöveg</mat-label>
+    <textarea matInput [(ngModel)]="prompt" rows="3"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full">
+    <mat-label>Működési mód</mat-label>
+    <mat-select [(ngModel)]="mode">
+      <mat-option value="answer">Válaszadás</mat-option>
+      <mat-option value="translate">Fordítás</mat-option>
+      <mat-option value="rephrase">Udvarias újrafogalmazás</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="ask()" [disabled]="loading">
+    {{ loading ? 'Küldés...' : 'Küldés' }}
+  </button>
+
+  <mat-card *ngIf="response">
+    <strong>Válasz:</strong>
+    <p>{{ response }}</p>
+  </mat-card>
+</mat-card>
