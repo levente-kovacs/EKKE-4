@@ -1,26 +1,30 @@
-<mat-card>
-  <h2>MiniChat</h2>
+<mat-card class="mat-typography">
+  <h2>Mini Chat LLM</h2>
 
-  <mat-form-field appearance="outline" class="full">
-    <mat-label>Kérdés / Szöveg</mat-label>
-    <textarea matInput [(ngModel)]="prompt" rows="3"></textarea>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Írd be a kérdésed / szöveged</mat-label>
+    <textarea matInput [(ngModel)]="prompt" rows="4"></textarea>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full">
+  <mat-form-field appearance="outline" class="full-width">
     <mat-label>Működési mód</mat-label>
     <mat-select [(ngModel)]="mode">
-      <mat-option value="answer">Válaszadás</mat-option>
-      <mat-option value="translate">Fordítás</mat-option>
+      <mat-option value="answer">Válasz</mat-option>
+      <mat-option value="translate">Fordítás angolra</mat-option>
       <mat-option value="rephrase">Udvarias újrafogalmazás</mat-option>
     </mat-select>
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="ask()" [disabled]="loading">
-    {{ loading ? 'Küldés...' : 'Küldés' }}
+    Küldés
   </button>
 
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner diameter="30"></mat-spinner>
+  </div>
+
   <mat-card *ngIf="response">
-    <strong>Válasz:</strong>
-    <p>{{ response }}</p>
+    <h3>Válasz:</h3>
+    <markdown [data]="response"></markdown>
   </mat-card>
 </mat-card>

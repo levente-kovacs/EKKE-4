@@ -20,22 +20,26 @@ export class ChatService {
 
     const headers = new HttpHeaders({
       Authorization: this.apiKey,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     });
 
     return this.http
       .post<any>(this.apiUrl, { inputs: fullPrompt }, { headers })
-      .pipe(map(res => ({ output: res[0]?.generated_text || 'Nincs válasz.' })));
+      .pipe(
+        map(res => ({
+          output: res[0]?.generated_text || 'Nincs válasz.'
+        }))
+      );
   }
 
   private buildPrompt(req: ChatRequest): string {
     switch (req.mode) {
       case 'translate':
-        return `Translate this to English:\n${req.input}`;
+        return `Translate this sentence to English:\n"${req.input}"`;
       case 'rephrase':
-        return `Rephrase this politely:\n${req.input}`;
+        return `Rephrase this more politely:\n"${req.input}"`;
       default:
-        return `Answer briefly:\n${req.input}`;
+        return `Answer the following question:\n"${req.input}"`;
     }
   }
 }
