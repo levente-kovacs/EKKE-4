@@ -1,12 +1,13 @@
 <mat-card class="mat-typography">
-  <h2>Mini Chat LLM</h2>
+  <small>Ask something from the</small>
+  <h2 class="mb-2">MiniChat LLM</h2>
 
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="outline" class="full-width mb-1">
     <mat-label>Írd be a kérdésed / szöveged</mat-label>
     <textarea matInput [(ngModel)]="prompt" rows="4"></textarea>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
+  <mat-form-field appearance="outline" class="full-width mb-1">
     <mat-label>Működési mód</mat-label>
     <mat-select [(ngModel)]="mode">
       <mat-option value="answer">Válasz</mat-option>

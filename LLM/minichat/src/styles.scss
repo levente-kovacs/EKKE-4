@@ -1,14 +1,32 @@
 @use '@angular/material' as mat;
 
-html {
-  color-scheme: dark;
-  @include mat.theme((
-    color: mat.$cyan-palette,
-    typography: Roboto,
-    density: 0
-  ));
-}
+// html {
+//   color-scheme: dark;
+//   @include mat.theme((
+//     color: mat.$cyan-palette,
+//     typography: Roboto,
+//     density: 0
+//   ));
+// }
 
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.dark-theme {
+  color-scheme: dark;
+  @include mat.all-component-themes((
+    color: mat.$cyan-palette,
+    typography: mat.define-typography-config(),
+    density: 0
+  ));
+}
+
+.light-theme {
+  color-scheme: light;
+  @include mat.all-component-themes((
+    color: mat.$teal-palette,
+    typography: mat.define-typography-config(),
+    density: 0
+  ));
+}

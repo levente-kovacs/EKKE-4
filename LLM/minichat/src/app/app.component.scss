@@ -1,0 +1,14 @@
+.app-toolbar {
+  background: #1e1e1e; // vagy hagyd az alap színt ha jó
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
