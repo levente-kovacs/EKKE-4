@@ -1,5 +1,10 @@
 <mat-toolbar color="primary" class="app-toolbar">
   <span class="logo">🧠 MiniChat</span>
+  <button mat-icon-button class="mode-btn" (click)="toggleTheme()">
+    <span class="mode-btn__wrapper">
+      <mat-icon [fontIcon]="themeService.isDark() ? 'light_mode' : 'dark_mode'"></mat-icon>
+    </span>
+  </button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

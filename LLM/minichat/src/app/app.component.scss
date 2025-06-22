@@ -5,10 +5,49 @@
   font-weight: bold;
   padding-left: 16px;
   border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.mode {
+  &-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 1rem;
+    height: 3rem;
+    width: 3rem;
+
+    &__wrapper {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+    }
+
+    & mat-icon {
+      // color: white;
+      margin: auto;
+      width: auto;
+      height: auto;
+      font-size: 1.8rem;
+    }
+  }
+
+}
+
+:host-context(.light-theme) .mode-btn mat-icon {
+  color: #b2ebf2 !important;
 }
